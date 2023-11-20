@@ -2,10 +2,11 @@
 import TopBar from "@/components/TopBar.vue";
 import StatusPanel from "@/components/StatusPanel.vue";
 import ControlPanel from "@/components/ControlPanel.vue";
+import BottomBar from "@/components/BottomBar.vue";
 
 export default {
   name: 'HomeView',
-  components: {ControlPanel, StatusPanel, TopBar},
+  components: {ControlPanel, StatusPanel, TopBar, BottomBar},
   data() {
     return {
       msg: 'Welcome to Your Vue.js App'
@@ -19,6 +20,7 @@ export default {
     <TopBar/>
     <StatusPanel style="margin-top: 25px;width: 70%;"/>
     <ControlPanel style="margin-top: 25px;width: 70%"/>
+    <BottomBar/>
   </div>
 </template>
 
@@ -32,6 +34,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 75px;
+//padding-bottom: 75px;
 }
 </style>

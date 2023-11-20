@@ -18,7 +18,7 @@ export default {
           Kwanho Lee
         </div>
         <div class="description">
-          内幕人士
+          内部人员
         </div>
       </div>
     </div>

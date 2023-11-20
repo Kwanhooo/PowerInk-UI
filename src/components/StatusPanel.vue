@@ -1,11 +1,24 @@
 <script>
+import {useDeviceStore} from "@/stores/deviceStore";
+
 export default {
-  name: "StatusPanel",
-  computed: {
-    sn() {
-      return sessionStorage.getItem('sn');
-    }
+  setup() {
+    const deviceStore = useDeviceStore();
+    return {deviceStore};
   },
+  name: "StatusPanel",
+  methods: {
+    pad(number) {
+      return number < 10 ? '0' + number : number;
+    },
+    beautifyDateTime(dateTime) {
+      if (dateTime) {
+        const date = new Date(dateTime);
+        return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日 ${this.pad(date.getHours())}:${this.pad(date.getMinutes())}:${this.pad(date.getSeconds())}`
+      }
+      return null;
+    }
+  }
 }
 </script>
 
@@ -17,14 +30,14 @@ export default {
       </div>
       <div class="device-info-wrapper">
         <div class="device-name">
-          Raspberry Pi Zero WH (Gen 1)
+          {{ deviceStore.deviceInfo.name?.length > 0 ? deviceStore.deviceInfo.name : '获取中...' }}
         </div>
         <div style="margin-top: .4em">
           <span style="background: #909399;border-radius: 10px;padding: 2px 4px 2px 9px;">
             S/N
           </span>
           <span style="margin-left: 8px">
-            {{ sn }}
+            {{ deviceStore.deviceInfo.id ?? '获取中...' }}
           </span>
         </div>
       </div>
@@ -32,7 +45,8 @@ export default {
     <div class="uptime-info">
       <div class="description">
         <span style="margin-left: 0;color: #909399">
-            * 设备已受到 PowerInk Server 验证
+            * 设备 “<span style="color: #FAB000;font-weight: bold">{{ deviceStore.deviceInfo.description }}</span>”
+          源自 <span style="color: #FAB000;font-weight: bold">{{ deviceStore.deviceInfo.ip ?? '因特网' }}</span> 与 PowerInk™ Server 连接
         </span>
       </div>
       <div class="last-seen" style="margin-top: 2px">
@@ -40,15 +54,16 @@ export default {
             最后在线
           </span>
         <span style="margin-left: 8px">
-            2023年11月8日 23:29:34
+            {{ beautifyDateTime(deviceStore.deviceInfo.lastSeen) ?? '获取中...' }}
           </span>
       </div>
       <div class="status" style="margin-top: 2px">
-        <span style="background: #67C23A;border-radius: 10px;padding: 2px 4px 2px 8px;">
+        <span style="border-radius: 10px;padding: 2px 4px 2px 8px;"
+              :class="{online:deviceStore.deviceInfo.online,offline:!deviceStore.deviceInfo.online}">
             状态
           </span>
         <span style="margin-left: 8px">
-            在线
+            {{ deviceStore.deviceInfo.online ? '在线' : '离线' }}
           </span>
       </div>
     </div>
@@ -56,6 +71,10 @@ export default {
 </template>
 
 <style scoped>
+* {
+  color: #222;
+}
+
 #status-panel-wrapper {
   background: white;
   border-radius: 20px;
@@ -94,5 +113,13 @@ export default {
   justify-content: center;
   align-content: center;
   font-size: 13px;
+}
+
+.online {
+  background: #67C23A
+}
+
+.offline {
+  background: #F56C6C
 }
 </style>
