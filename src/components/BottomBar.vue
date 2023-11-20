@@ -26,7 +26,7 @@ export default {
       <div class="component">
         <a href="https://uri.amap.com/marker?position=112.99,28.14&name=中南大学（铁道校区）&src=&coordinate=&callnative=0"
            target="_blank">
-          <div class="title">
+          <div class="title" style="line-height: 2.3rem">
             <span>Made With ❤️ in Changsha</span>
             <img src="/src/assets/svg/go.svg" class="go">
           </div>
@@ -49,7 +49,7 @@ a {
 }
 
 #bottom-wrapper {
-  margin-top: 250px;
+  margin-top: 100px;
   width: 100%;
   height: 125px;
   background-color: #ffffff;
@@ -58,7 +58,7 @@ a {
 #bottom-wrapper-inner {
   display: flex;
   justify-content: space-between;
-  margin: 0 22rem;
+  margin: 0 18rem;
 }
 
 #copyright-wrapper {
