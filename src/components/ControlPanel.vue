@@ -14,7 +14,8 @@
     <div class="bottom-wrapper">
       <div class="radius display-wrapper">
         <div class="title">当前同步帧</div>
-        <img id="display-img" class="display" src="https://asset.0xcafebabe.cn/b827eb1541ca/frame.bmp">
+        <img id="display-img" class="display"
+             :src="'https://asset.0xcafebabe.cn/'+this.deviceStore.deviceInfo.id+'/frame.bmp'">
       </div>
       <div class="radius settings-wrapper" v-if="deviceStore.activeMode !== 0">
         <div class="title" style="margin-bottom: 10px">控制面板</div>
@@ -98,7 +99,7 @@ export default {
     //       })
     // },
     updateDisplayImg() {
-      document.getElementById('display-img').src = 'https://asset.0xcafebabe.cn/b827eb1541ca/frame.bmp?t=' + new Date().getTime();
+      document.getElementById('display-img').src = 'https://asset.0xcafebabe.cn/' + this.deviceStore.deviceInfo.id + '/frame.bmp?t=' + new Date().getTime();
     },
     setActiveMode(index) {
       this.deviceStore.setActiveMode(index);

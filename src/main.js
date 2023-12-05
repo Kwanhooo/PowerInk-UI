@@ -11,7 +11,8 @@ import "vue-toastification/dist/index.css";
 
 const app = createApp(App)
 
-sessionStorage.setItem('sn', 'b827eb1541ca')
+const demoDeviceSN = 'b827eb1541ca'
+sessionStorage.setItem('sn', demoDeviceSN)
 
 app.use(createPinia())
 app.use(router)
